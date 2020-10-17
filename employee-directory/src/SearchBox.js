@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-function SearchBox(props) {
+function SearchBox (props) {
     return (
         <div>
-
+            <input onChange={props.handleInput} type="text" />
         </div>
     )
 }
 
-export default SearchBox
+export default SearchBox;

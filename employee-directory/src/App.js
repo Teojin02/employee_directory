@@ -1,30 +1,41 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Component } from 'react';
+import EmployeeList from './EmployeeList';
+import SearchBox from './SearchBox';
+
 
 class App extends Component {
   constructor(props) {
-    super(props) {
-      this.state = {
-        People: [
-          {Name:"Dwight", role:"Manager"},
-          {Name:"Jim", role:"Sales"},
-          {Name:"Pam", role:"Sales"},
-          {Name:"Stanley", role:"Sales"},
-          {Name:"Phylis", role:"Sales"}
-        ]
-        SearchEmployees: ''
-      }
+    super(props);
+    this.state ={
+      employees: [
+        {name:"Dwight", position:"Manager"},
+        {name:"Pam" , position:"Sales"},
+        {name:"Jim" , position:"Sales"},
+        {name:"Phyilis" , position:"Sales"},
+        {name:"Stanley" , position:"Sales"}
+      ],
+      searchEmployee:''
     }
   }
+
+  handleInput = (e) => {
+    console.log(e.target.value);
+    this.setState({searchEmployee: e.target.value })
+  }
   render () {
+    let filteredEmployees = this.state.employees.filter((Employee) =>{
+      return Employee.name.toLowerCase().includes(this.state.searchEmployee.toLowerCase())
+    })
+
     return (
       <div className="App">
-        <h1>Employees</h1>
+        <h1>Dunder Mifflin Employee's </h1>
+        <SearchBox handleInput={this.handleInput}/>,
+        <EmployeeList filteredEmployees={filteredEmployees}  />
       </div>
-    )
+    );
   }
-
 }
-
 export default App;
